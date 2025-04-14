@@ -139,12 +139,10 @@ function getAllResult(promises) {
  * [promise1, promise4, promise3, promise2] => Promise.resolved('10403020')
  */
 function queuPromises(promises) {
-  return promises.reduce((accumulator, currentPromise) => {
-    return accumulator.then((result) => {
-      return currentPromise.then((value) => {
-        return result + value;
-      });
-    });
+  return promises.reduce(async (accumulator, currentPromise) => {
+    const result = await accumulator;
+    const value = await currentPromise;
+    return result + value;
   }, Promise.resolve(''));
 }
 
